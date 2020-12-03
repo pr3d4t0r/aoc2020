@@ -67,6 +67,8 @@ resetpy: ALWAYS
 test: ALWAYS
 	pip install -r requirements.txt
 	pip install -e .
+	pytest -v ./test/test-expenses.py
+	pytest -v ./test/test-trees.py
 	pytest -v ./test/test-util.py
 	pytest -v ./test/test-validate.py
 	pip uninstall -y $(MODULE)==$(VERSION) || true
