@@ -3,7 +3,8 @@
 
 
 from aoc.validate import extractPasswordsFrom
-from aoc.validate import meetsPolicy
+from aoc.validate import main
+from aoc.validate import meetsOldPolicy
 
 
 # +++ constants +++
@@ -13,7 +14,7 @@ TEST_VALIDATE_INPUT_FILE = './resources/test/passwords-test.txt'
 
 # +++ tests +++
 
-_passwords = None
+_passwords = None  # reused
 
 
 def test_extractPasswordsFrom():
@@ -26,10 +27,12 @@ def test_extractPasswordsFrom():
     assert _passwords[2][0] == '2-9'
 
 
-def test_meetsPolicy():
-    meetsPolicy(_passwords[0])
+def test_meetsOldPolicy():
+    assert meetsOldPolicy(_passwords[0])
+    assert not meetsOldPolicy(_passwords[1])
+    assert meetsOldPolicy(_passwords[2])
 
 
-test_extractPasswordsFrom()
-test_meetsPolicy()
+def test_main():
+    assert main(TEST_VALIDATE_INPUT_FILE) == 2
 

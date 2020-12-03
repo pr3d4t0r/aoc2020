@@ -2,6 +2,7 @@
 # vim: set fileencoding=utf-8:
 
 
+from collections import Counter
 from collections import namedtuple
 
 from util import day
@@ -21,7 +22,7 @@ def extractPasswordsFrom(fileName):
     return passwords
 
 
-def meetsPolicy(passwordDef):
+def meetsOldPolicy(passwordDef):
     """
     passwordDef fields:
 
@@ -36,19 +37,27 @@ def meetsPolicy(passwordDef):
         max =int(passwordDef[0].split('-')[1]) ,
     )
 
-    # TODO: Use a Counter object here:
-    password = passwordDef[2]
+    password = Counter(sorted([letter for letter in passwordDef[2]]))
+    
+    return password[policy.letter] >= policy.min and password[policy.letter] <= policy.max
 
-    return False
 
-
-def main():
-    if len(sys.argv) != 2:
-        die('syntax:  validate passwords-file.ext', 1)
+def main(fileName = None):
+    if not fileName:
+        if len(sys.argv) < 2:
+            die('syntax:  validate passwords-file.ext', 1)
+        else:
+            fileName = sys.argv[1]
 
     day(2)
     
-    passwords = extractPasswordsFrom(sys.argv[1])
+    valid = 0
+    for password in extractPasswordsFrom(fileName):
+        valid += 1 if meetsOldPolicy(password) else 0
+
+    print('valid passwords (old) = %d' % valid)
+
+    return valid
 
 
 # --- main ---

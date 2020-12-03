@@ -29,7 +29,7 @@ if '__main__' == __name__:
         description          = 'Advent of Code 2020',
 #         entry_points         = {
 #                                     'console_scripts': {
-#                                         'vtdbchk=covidvu.cryostation:dbcheckmain',
+#                                         'aocvalidate=aoc.validate:main',
 #                                     }
 #                                },
         include_package_data = True,
