@@ -21,17 +21,17 @@ if '__main__' == __name__:
     requirements = readToList('requirements.txt')
 
     setup(
-        author               = 'The COVIDvu contributors',
-        author_email         = 'covidvu.support@virustrack.live',
-        dependency_links     = [
-                                    'https://github.com/pr3d4t0r/repo/tarball/master#egg=vtrustler',
-                               ],
-        description          = 'COVIDvu common tools',
-        entry_points         = {
-                                    'console_scripts': {
-                                        'vtdbchk=covidvu.cryostation:dbcheckmain',
-                                    }
-                               },
+        author               = 'Eugene Ciurana',
+        author_email         = 'aoc2020@cime.net',
+#         dependency_links     = [
+#                                     'https://github.com/pr3d4t0r/repo/tarball/master#egg=vtrustler',
+#                                ],
+        description          = 'Advent of Code 2020',
+#         entry_points         = {
+#                                     'console_scripts': {
+#                                         'vtdbchk=covidvu.cryostation:dbcheckmain',
+#                                     }
+#                                },
         include_package_data = True,
         install_requires     = requirements,
         license              = open('LICENSE.txt').read(),
@@ -39,7 +39,7 @@ if '__main__' == __name__:
         name                 = open('modulename.txt').read().replace('\n', ''),
         namespace_packages   = [ ],
         packages             = find_packages(),
-        url                  = 'http://virustrack.live/covid',
+        url                  = 'https://adventofcode.com/2020',
         version              = open('version.txt').read().strip(),
     )
 

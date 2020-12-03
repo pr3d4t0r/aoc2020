@@ -28,7 +28,7 @@ all: ALWAYS
 clean:
 	rm -Rf $(BUILD)/*
 	rm -Rf $(DIST)/*
-	rm -Rfv $$(find covidvu | awk '/__pycache__$$/')
+	rm -Rfv $$(find $(MODULE) | awk '/__pycache__$$/')
 	rm -Rfv $$(find test | awk '/__pycache__$$/')
 	rm -Rfv $$(find . | awk '/.ipynb_checkpoints/')
 	pushd ./resources ; pip uninstall -y $(MODULE)==$(VERSION) || true ; popd
@@ -36,7 +36,7 @@ clean:
 
 install:
 	pushd resources/ && pip install -e .. && popd
-	pip list | awk 'NR < 3 { print; } /covidvu/'
+	pip list | awk 'NR < 3 { print; } /$(MODULE)/'
 
 
 module:
@@ -46,7 +46,7 @@ module:
 
 nuke: ALWAYS
 	make clean
-	rm -Rf $(shell find covidvu | awk '/__pycache__$$/')
+	rm -Rf $(shell find $(MODULE) | awk '/__pycache__$$/')
 	rm -Rf $(shell find test/ | awk '/__pycache__$$/')
 
 
@@ -69,20 +69,10 @@ test: ALWAYS
 	[[ -d $(SITE_DATA) ]] || mkdir -p $(SITE_DATA)
 	pip install -r requirements.txt
 	pip install -e .
-	pytest -v ./test/covidvu/pipeline/test_jsonpack.py
-	pytest -v ./test/covidvu/pipeline/test_pyavka.py
-	pytest -v ./test/covidvu/pipeline/test_vucounty.py
-	pytest -v ./test/covidvu/pipeline/test_vuhospitals.py
-	pytest -v ./test/covidvu/pipeline/test_vujson.py
-	pytest -v ./test/covidvu/pipeline/test_vuregions.py
-	pytest -v ./test/covidvu/pipeline/test_vugrowth.py
-	pytest -v ./test/covidvu/test_cryostation.py
-	pytest -v ./test/covidvu/test_predict.py
-	pytest -v ./test/covidvu/test_utils.py
-	pytest -v ./test/covidvu/test_visualize.py
-	pytest -v ./test/covidvu/virustrack/test_countryinfo.py
+	pytest -v ./test/test-util.py
+	pytest -v ./test/test-validate.py
 	pip uninstall -y $(MODULE)==$(VERSION) || true
-	rm -Rfv $$(find covidvu | awk '/__pycache__$$/')
+	rm -Rfv $$(find $(MODULE) | awk '/__pycache__$$/')
 	rm -Rfv $$(find test | awk '/__pycache__$$/')
 
 
