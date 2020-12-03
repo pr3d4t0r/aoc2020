@@ -42,6 +42,34 @@ def meetsOldPolicy(passwordDef):
     return password[policy.letter] >= policy.min and password[policy.letter] <= policy.max
 
 
+def meetsPolicy(passwordDef):
+    """
+    passwordDef fields:
+
+    0 - tranch, password policy pos1, pos2
+    1 - letter frequency
+    2 - password
+    """
+    
+    letterPolicy = namedtuple('LetterPolicy', ['letter', 'pos1', 'pos2',])
+    policy = letterPolicy( letter = passwordDef[1],
+        pos1 = int(passwordDef[0].split('-')[0])-1,
+        pos2 =int(passwordDef[0].split('-')[1])-1,
+    )
+    letterPositions = [position for position, letter in enumerate(passwordDef[2]) if letter == policy.letter]
+
+    if letterPositions:
+        valid1 = policy.pos1 in letterPositions
+        valid2 = policy.pos2 in letterPositions
+
+        if valid1 and not valid2:
+            return True
+        elif not valid1 and valid2:
+            return True
+
+    return False
+
+    
 def main(fileName = None):
     if not fileName:
         if len(sys.argv) < 2:
@@ -51,13 +79,16 @@ def main(fileName = None):
 
     day(2)
     
+    validOldStyle = 0
     valid = 0
     for password in extractPasswordsFrom(fileName):
-        valid += 1 if meetsOldPolicy(password) else 0
+        validOldStyle += 1 if meetsOldPolicy(password) else 0
+        valid += 1 if meetsPolicy(password) else 0
 
-    print('valid passwords (old) = %d' % valid)
+    print('valid passwords (old) = %d' % validOldStyle)
+    print('valid passwords (new) = %d' % valid)
 
-    return valid
+    return validOldStyle, valid
 
 
 # --- main ---
