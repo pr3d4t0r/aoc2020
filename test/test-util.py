@@ -2,19 +2,18 @@
 # vim: set fileencoding=utf-8:
 
 
-from util import day
 from util import die
+from util import mainStart
 
 
 
 # +++ tests +++
 
-def test_day():
-    today = day(0)
-    assert isinstance(today, int)
-
-
 def test_die():
     die('bogus', 0, unitTest = True)
     pass
+
+
+def test_mainStart():
+    assert mainStart('bogus-name.txt', 1) == 'bogus-name.txt'
 

@@ -13,8 +13,14 @@ def die(message, exitCode, unitTest = False):
         sys.exit(exitCode)
 
 
-def day(number):
-    print('*** AoC Day %d ***\n' % number)
+def mainStart(fileName, dayAoC):
+    if not fileName:
+        if len(sys.argv) < 2:
+            die('missing input file name argument', 99)
+        else:
+            fileName = sys.argv[1]
 
-    return number
+    print('*** AoC Day %d ***\n' % dayAoC)
+
+    return fileName
 
