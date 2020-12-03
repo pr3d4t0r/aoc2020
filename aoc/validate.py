@@ -5,10 +5,7 @@
 from collections import Counter
 from collections import namedtuple
 
-from util import day
-from util import die
-
-import sys
+from util import mainStart
 
 
 # *** functions ***
@@ -71,13 +68,7 @@ def meetsPolicy(passwordDef):
 
     
 def main(fileName = None):
-    if not fileName:
-        if len(sys.argv) < 2:
-            die('syntax:  validate passwords-file.ext', 1)
-        else:
-            fileName = sys.argv[1]
-
-    day(2)
+    fileName = mainStart(fileName, 2)
     
     validOldStyle = 0
     valid = 0
