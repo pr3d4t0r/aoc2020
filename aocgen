@@ -1,0 +1,79 @@
+#!/bin/zsh
+# See: https://github.com/pr3d4t0r/aoc2020/blob/0001-AoC-day-2/LICENSE
+# vim: set fileencoding=utf-8:
+
+
+# *** constants ***
+
+CODE_DIR="./aoc"
+DATA_DIR="./resources"
+TEST_DATA_DIR="$DATA_DIR/test"
+TEST_DIR="./test"
+PROGRAM_TEMPLATE="$DATA_DIR/templates/prog-template.py"
+UNIT_TEST_TEMPLATE="$DATA_DIR/templates/test-template.py"
+
+
+# *** functions ***
+
+function die {
+    echo "$1"
+    exit "$2"
+} # die
+
+
+function assertProgramNameIn {
+    local programName="$1"
+
+    [[ -n "$programName" ]] || die "please provide a valid program name (no extension)", "1"
+} # assertProgramNameIn
+
+
+function initCodeFor {
+    local programName
+
+    programName="$CODE_DIR/$1.py"
+
+    cat "$PROGRAM_TEMPLATE" > "$programName"
+    echo "-- initialized: $programName"
+} # initCodeFor
+
+
+function initUnitTestsFor {
+    local unitTest
+    local progName="$1"
+
+    unitTest="$TEST_DIR/test-$1.py"
+
+    cat "$UNIT_TEST_TEMPLATE" | awk -v "t=$progName" 'BEGIN { tU=toupper(t); } { gsub("%t%", t); gsub("%T%", tU); print; }' > "$unitTest"
+
+    echo "-- initialized: $unitTest"
+} # initUnitTestsFor
+
+
+function initDataFilesFor {
+    local dataFile
+    local programName="$1"
+    local testDataFile
+
+    dataFile="$DATA_DIR/$programName-data.txt"
+    testDataFile="$TEST_DATA_DIR/$programName-test-data.txt"
+
+    touch "$dataFile" "$testDataFile"
+
+    echo "-- initialized: $dataFile"
+    echo "-- initialized: $testDataFile"
+} # initDataFilesFor
+
+
+# +++ main +++
+
+assertProgramNameIn "$1"
+programName="$1"
+
+initCodeFor "$programName"
+initUnitTestsFor "$programName"
+initDataFilesFor "$programName"
+
+cat $(grep -lr "TODO:" . | awk '!/site-packages/ && !/\.swp/ && !/-template/ && !/aocgen/') | awk '/TODO:/'
+echo '-- done!'
+

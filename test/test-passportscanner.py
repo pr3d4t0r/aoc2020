@@ -59,8 +59,6 @@ def test_countValidIn():
     assert 2 == countValidIn(_passports, isValidPassport)
 
 
-# TODO: read strict test data
-
 def test__assertValidYearRangeFor():
     with pytest.raises(ValueError):
         _assertValidYearRangeFor('aaaa', 1920, 2002)
