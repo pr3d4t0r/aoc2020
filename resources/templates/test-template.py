@@ -16,6 +16,5 @@ TEST_%T%_FILE_NAME = 'resources/test/%t%-test-data.txt'
 
 
 def test_main():
-    # TODO: add the %t% unit test to the Makefile
     assert main(TEST_%T%_FILE_NAME) == (False, False)
 
