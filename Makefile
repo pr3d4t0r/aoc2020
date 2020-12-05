@@ -67,6 +67,7 @@ resetpy: ALWAYS
 test: ALWAYS
 	pip install -r requirements.txt
 	pip install -e .
+	pytest -v ./test/test-boardingpass.py
 	pytest -v ./test/test-expenses.py
 	pytest -v ./test/test-passportscanner.py
 	pytest -v ./test/test-trees.py
