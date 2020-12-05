@@ -57,24 +57,37 @@ def _seatInfo(boardingPass):
 
 def findHighestIDIn(boardingPasses):
     maxID = -1
+    seatIDs = list()
 
     for boardingPass in boardingPasses:
         _, _, seatID = _seatInfo(boardingPass)
+        seatIDs.append(seatID)
         if seatID > maxID:
             maxID = seatID
 
-    return maxID
+    return maxID, sorted(seatIDs)
+
+
+def resolveSeat(seatIDs):
+    offset = seatIDs[0]
+    for currentID in range(seatIDs[0], len(seatIDs)):
+        seatID = seatIDs[currentID-offset]
+        if currentID != seatID:
+            return currentID
 
 
 def main(fileName = None):
     fileName = mainStart(fileName, 5)
     boardingPasses = loadBoardingPassesFrom(fileName)
 
-    maxID = findHighestIDIn(boardingPasses)
+    maxID, \
+    seatIDs = findHighestIDIn(boardingPasses)
+    mySeatID = resolveSeat(seatIDs) if len(seatIDs) > 100 else 0 # for unit tests; see day 5 spec for reason
 
     print('maxID = %d' % maxID)
+    print('My seat = %d' % mySeatID)
 
-    return maxID, False
+    return maxID, mySeatID
 
 
 # --- main ---

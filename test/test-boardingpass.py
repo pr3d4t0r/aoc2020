@@ -2,14 +2,12 @@
 # vim: set fileencoding=utf-8:
 
 
-from aoc.boardingpass import loadBoardingPassesFrom
-from aoc.boardingpass import main
-from aoc.boardingpass import _rowFrom
 from aoc.boardingpass import _colFrom
+from aoc.boardingpass import _rowFrom
 from aoc.boardingpass import _seatInfo
 from aoc.boardingpass import findHighestIDIn
-
-import pytest
+from aoc.boardingpass import loadBoardingPassesFrom
+from aoc.boardingpass import main
 
 
 # +++ constants +++
@@ -52,15 +50,14 @@ def test__seatInfo():
 
 
 def test_findHighestIDIn():
-    assert findHighestIDIn(_boardingPasses) == 820
+    maxID, seatIDs = findHighestIDIn(_boardingPasses)
+
+    assert maxID == 820
+    assert isinstance(seatIDs, list)
 
 
 def test_main():
-    assert main(TEST_BOARDINGPASS_FILE_NAME) == (820, False)
+    maxID, _ = main(TEST_BOARDINGPASS_FILE_NAME)
 
+    assert maxID == 820
 
-# test_loadBoardingPassesFrom()
-# test__rowFrom()
-# test__colFrom()
-# test__seatInfo()
-# test_findHighestIDIn()
