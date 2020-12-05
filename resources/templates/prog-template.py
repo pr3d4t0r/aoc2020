@@ -13,8 +13,7 @@ from util import mainStart
 # *** functions ***
 
 def main(fileName = None):
-    # TODO: set the AoC day in the main program
-    fileName = mainStart(fileName, )
+    fileName = mainStart(fileName, %d%)
 
     return False, False
 

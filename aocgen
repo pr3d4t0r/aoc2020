@@ -7,9 +7,9 @@
 
 CODE_DIR="./aoc"
 DATA_DIR="./resources"
+PROGRAM_TEMPLATE="$DATA_DIR/templates/prog-template.py"
 TEST_DATA_DIR="$DATA_DIR/test"
 TEST_DIR="./test"
-PROGRAM_TEMPLATE="$DATA_DIR/templates/prog-template.py"
 UNIT_TEST_TEMPLATE="$DATA_DIR/templates/test-template.py"
 
 
@@ -32,10 +32,22 @@ function initCodeFor {
     local programName
 
     programName="$CODE_DIR/$1.py"
+    day=$(date +%d)
 
-    cat "$PROGRAM_TEMPLATE" > "$programName"
+    cat "$PROGRAM_TEMPLATE" | awk -v "d=$day" 'BEGIN { gsub("0", "", d); } { gsub("%d%", d); print; }' > "$programName"
     echo "-- initialized: $programName"
 } # initCodeFor
+
+
+function updateMakefileWith {
+    local tmpMakefile=$(mktemp)
+
+    cat Makefile| awk -v "p=$1" '{ if (index($0, "test:")) b = 1; if (b && index($0, "pip uninstall")) { printf("\tpytest -v %s\n", p); b = 0; } print; }' > "$tmpMakefile"
+    cat "$tmpMakefile" > Makefile
+    rm -f "$tmpMakefile"
+
+    echo "-- Makefile updated"
+} # updateMakefileWith
 
 
 function initUnitTestsFor {
@@ -47,6 +59,8 @@ function initUnitTestsFor {
     cat "$UNIT_TEST_TEMPLATE" | awk -v "t=$progName" 'BEGIN { tU=toupper(t); } { gsub("%t%", t); gsub("%T%", tU); print; }' > "$unitTest"
 
     echo "-- initialized: $unitTest"
+
+    updateMakefileWith "$unitTest"
 } # initUnitTestsFor
 
 
@@ -74,6 +88,6 @@ initCodeFor "$programName"
 initUnitTestsFor "$programName"
 initDataFilesFor "$programName"
 
-cat $(grep -lr "TODO:" . | awk '!/site-packages/ && !/\.swp/ && !/-template/ && !/aocgen/') | awk '/TODO:/'
+# cat $(grep -lr "TODO:" . | awk '!/site-packages/ && !/\.swp/ && !/-template/ && !/aocgen/') | awk '/TODO:/'
 echo '-- done!'
 
