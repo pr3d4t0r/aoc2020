@@ -40,7 +40,6 @@ install:
 
 module:
 	pip install -r $(REQUIREMENTS)
-	for f in aoc/*; do mypy "$$f"; done
 	python setup.py bdist_wheel
 
 
@@ -74,10 +73,12 @@ test: ALWAYS
 	pytest -v ./test/test-trees.py
 	pytest -v ./test/test-util.py
 	pytest -v ./test/test-validate.py
+	pytest -v ./test/test-customforms.py
 	pip uninstall -y $(MODULE)==$(VERSION) || true
 	rm -Rfv $$(find $(MODULE) | awk '/__pycache__$$/')
 	rm -Rfv $$(find ./aoc | awk '/__pycache__$$/')
 	rm -Rfv $$(find test | awk '/__pycache__$$/')
+	for f in aoc/*; do mypy "$$f"; done
 
 
 ALWAYS:
