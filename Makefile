@@ -27,7 +27,7 @@ all: ALWAYS
 clean:
 	rm -Rf $(BUILD)/*
 	rm -Rf $(DIST)/*
-	rm -Rfv $$(find $(MODULE) | awk '/__pycache__$$/')
+	rm -Rfv $$(find ./aoc | awk '/__pycache__$$/')
 	rm -Rfv $$(find test | awk '/__pycache__$$/')
 	rm -Rfv $$(find . | awk '/.ipynb_checkpoints/')
 	pushd ./resources ; pip uninstall -y $(MODULE)==$(VERSION) || true ; popd
@@ -73,9 +73,12 @@ test: ALWAYS
 	pytest -v ./test/test-trees.py
 	pytest -v ./test/test-util.py
 	pytest -v ./test/test-validate.py
+	pytest -v ./test/test-customforms.py
 	pip uninstall -y $(MODULE)==$(VERSION) || true
 	rm -Rfv $$(find $(MODULE) | awk '/__pycache__$$/')
+	rm -Rfv $$(find ./aoc | awk '/__pycache__$$/')
 	rm -Rfv $$(find test | awk '/__pycache__$$/')
+	for f in aoc/*; do mypy "$$f"; done
 
 
 ALWAYS:

@@ -2,6 +2,7 @@
 # vim: set fileencoding=utf-8:
 
 
+from aoc.%t% import loadExerciseDataFrom
 from aoc.%t% import main
 
 import pytest
@@ -13,6 +14,15 @@ TEST_%T%_FILE_NAME = 'resources/test/%t%-test-data.txt'
 
 
 # +++ tests +++
+
+_exerciseData = None  # a collection
+
+
+def test_loadExerciseDataFrom():
+    global _exerciseData
+
+    _exerciseData = loadExerciseDataFrom(TEST_%T%_FILE_NAME)
+    assert False
 
 
 def test_main():
