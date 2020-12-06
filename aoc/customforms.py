@@ -24,7 +24,7 @@ def confirmedMixedAnswers(groupsData:list):
 
         results.append(groupAnswers)
 
-    allCounts = sum([ sum(result) for result in results ])
+    allCounts = sum(( sum(result) for result in results ))
 
     return allCounts
 
@@ -44,7 +44,7 @@ def confirmedGroupAnswers(groupsData:list):
         results.append(groupAnswers)
 
 
-    accurateCounts = sum([ sum(result) for result in results ])
+    accurateCounts = sum(( sum(result) for result in results ))
 
     return accurateCounts
 
