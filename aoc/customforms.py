@@ -10,6 +10,9 @@ a_OFFSET = ord('a')
 
 # +++ constants +++
 
+
+# *** functions ***
+
 def loadExerciseDataFrom(fileName) -> list:
     # return [f.replace('\n', '') for f in ( b for b in open(fileName, 'r').read().split('\n\n') if len(b) )]
     return [ b for b in open(fileName, 'r').read().split('\n\n') if len(b) ]
@@ -48,8 +51,6 @@ def confirmedGroupAnswers(groupsData:list):
 
     return accurateCounts
 
-
-# *** functions ***
 
 def main(fileName:str = None):
     fileName = mainStart(fileName, 5)

@@ -1,9 +1,11 @@
-# See: https://github.com/pr3d4t0r/aoc2020/blob/0001-AoC-day-2/LICENSE
+# BSD-3 - See: https://github.com/pr3d4t0r/aoc2020/blob/master/LICENSE.txt
 # vim: set fileencoding=utf-8:
 
 
 from aoc.%t% import loadExerciseDataFrom
 from aoc.%t% import main
+from aoc.%t% import resolvePuzzle01Using
+from aoc.%t% import resolvePuzzle02Using
 
 import pytest
 
@@ -15,16 +17,37 @@ TEST_%T%_FILE_NAME = 'resources/test/%t%-test-data.txt'
 
 # +++ tests +++
 
-_exerciseData = None  # a collection
+_data = None  # a collection
 
 
 def test_loadExerciseDataFrom():
-    global _exerciseData
+    global _data
 
-    _exerciseData = loadExerciseDataFrom(TEST_%T%_FILE_NAME)
-    assert False
+    _data = loadExerciseDataFrom(TEST_%T%_FILE_NAME)
+
+    assert not _data
+
+
+def test_resolvePuzzle01Using():
+    x = resolvePuzzle01Using(_data)
+
+    assert x == -1
+
+
+def test_resolvePuzzle02Using():
+    x = resolvePuzzle02Using(_data)
+
+    assert x == -1
 
 
 def test_main():
-    assert main(TEST_%T%_FILE_NAME) == (False, False)
+    assert main(TEST_%T%_FILE_NAME) == (-1, -1)
+
+
+# TODO: --- remove before final check-in ---
+
+# test_loadExerciseDataFrom()
+# test_resolvePuzzle01Using()
+# test_resolvePuzzle02Using()
+# test_main()
 

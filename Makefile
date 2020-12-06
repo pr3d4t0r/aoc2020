@@ -64,6 +64,7 @@ resetpy: ALWAYS
 	rm -Rfv ./.Python ./bin ./build ./dist ./include ./lib
 
 
+#	for f in aoc/*; do mypy "$$f"; done
 test: ALWAYS
 	pip install -r requirements.txt
 	pip install -e .
@@ -78,7 +79,6 @@ test: ALWAYS
 	rm -Rfv $$(find $(MODULE) | awk '/__pycache__$$/')
 	rm -Rfv $$(find ./aoc | awk '/__pycache__$$/')
 	rm -Rfv $$(find test | awk '/__pycache__$$/')
-	for f in aoc/*; do mypy "$$f"; done
 
 
 ALWAYS:
