@@ -42,13 +42,6 @@ def _colFrom(boardingPass):
 
 
 def _seatInfo(boardingPass):
-    """
-    Returns a tuple:
-    
-        - row
-        - column
-        - ID
-    """
     row = _rowFrom(boardingPass)
     col = _colFrom(boardingPass)
     
