@@ -30,6 +30,7 @@ clean:
 	rm -Rfv $$(find ./aoc | awk '/__pycache__$$/')
 	rm -Rfv $$(find test | awk '/__pycache__$$/')
 	rm -Rfv $$(find . | awk '/.ipynb_checkpoints/')
+	rm -fv $(find . | awk '/bogus/')
 	pushd ./resources ; pip uninstall -y $(MODULE)==$(VERSION) || true ; popd
     
 
