@@ -18,7 +18,7 @@
 #     ..##.......
 
 
-from bitarray import bitarray
+from bitarray import bitarray # type: ignore
 
 from util import mainStart
 

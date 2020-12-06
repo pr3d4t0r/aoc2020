@@ -27,7 +27,7 @@ all: ALWAYS
 clean:
 	rm -Rf $(BUILD)/*
 	rm -Rf $(DIST)/*
-	rm -Rfv $$(find $(MODULE) | awk '/__pycache__$$/')
+	rm -Rfv $$(find ./aoc | awk '/__pycache__$$/')
 	rm -Rfv $$(find test | awk '/__pycache__$$/')
 	rm -Rfv $$(find . | awk '/.ipynb_checkpoints/')
 	pushd ./resources ; pip uninstall -y $(MODULE)==$(VERSION) || true ; popd
@@ -40,6 +40,7 @@ install:
 
 module:
 	pip install -r $(REQUIREMENTS)
+	for f in aoc/*; do mypy "$$f"; done
 	python setup.py bdist_wheel
 
 
@@ -75,6 +76,7 @@ test: ALWAYS
 	pytest -v ./test/test-validate.py
 	pip uninstall -y $(MODULE)==$(VERSION) || true
 	rm -Rfv $$(find $(MODULE) | awk '/__pycache__$$/')
+	rm -Rfv $$(find ./aoc | awk '/__pycache__$$/')
 	rm -Rfv $$(find test | awk '/__pycache__$$/')
 
 

@@ -7,7 +7,8 @@ from util import mainStart
 
 # +++ constants +++
 
-
+def loadExerciseDataFrom(fileName: str) -> list:
+    raise NotImplementedError
 
 
 # *** functions ***

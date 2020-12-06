@@ -13,14 +13,14 @@ MAX_ROW = 127
 
 # *** functions ***
 
-def loadBoardingPassesFrom(fileName):
+def loadBoardingPassesFrom(fileName: str) -> list:
     return [ b for b in open(fileName, 'r').read().split('\n') if len(b) ]
 
 
-def _binSearchIn(data, head):
-    tail   = 0
-    ptr    = 0
-    mid    = 0
+def _binSearchIn(data: list, head: int):
+    tail: int = 0
+    ptr:  int = 0
+    mid:  int = 0
 
     while tail < head:
         mid = int((head+tail)/2)

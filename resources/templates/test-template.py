@@ -2,6 +2,7 @@
 # vim: set fileencoding=utf-8:
 
 
+from aoc.%t% import loadExerciseDataFrom
 from aoc.%t% import main
 
 import pytest
