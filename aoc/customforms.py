@@ -5,7 +5,7 @@
 from util import mainStart
 
 
-a_OFFSET = 97
+a_OFFSET = ord('a')
 
 
 # +++ constants +++
