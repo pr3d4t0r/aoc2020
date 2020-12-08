@@ -7,6 +7,7 @@
 
 CODE_DIR="./aoc"
 DATA_DIR="./resources"
+DAY=$(date +%d)
 PROGRAM_TEMPLATE="$DATA_DIR/templates/prog-template.py"
 TEST_DATA_DIR="$DATA_DIR/test"
 TEST_DIR="./test"
@@ -32,9 +33,8 @@ function initCodeFor {
     local programName
 
     programName="$CODE_DIR/$1.py"
-    day=$(date +%d)
 
-    cat "$PROGRAM_TEMPLATE" | awk -v "d=$day" 'BEGIN { gsub("0", "", d); } { gsub("%d%", d); print; }' > "$programName"
+    cat "$PROGRAM_TEMPLATE" | awk -v "d=$DAY" 'BEGIN { gsub("0", "", d); } { gsub("%d%", d); print; }' > "$programName"
     echo "-- initialized: $programName"
 } # initCodeFor
 

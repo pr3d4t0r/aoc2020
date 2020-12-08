@@ -30,7 +30,7 @@ clean:
 	rm -Rfv $$(find ./aoc | awk '/__pycache__$$/')
 	rm -Rfv $$(find test | awk '/__pycache__$$/')
 	rm -Rfv $$(find . | awk '/.ipynb_checkpoints/')
-	rm -fv $(find . | awk '/bogus/')
+	rm -fv $$(find . | awk '/bogus/')
 	pushd ./resources ; pip uninstall -y $(MODULE)==$(VERSION) || true ; popd
     
 
@@ -69,14 +69,14 @@ resetpy: ALWAYS
 test: ALWAYS
 	pip install -r requirements.txt
 	pip install -e .
+	pytest -v ./test/test-baggage.py
 	pytest -v ./test/test-boardingpass.py
+	pytest -v ./test/test-customforms.py
 	pytest -v ./test/test-expenses.py
 	pytest -v ./test/test-passportscanner.py
 	pytest -v ./test/test-trees.py
 	pytest -v ./test/test-util.py
 	pytest -v ./test/test-validate.py
-	pytest -v ./test/test-customforms.py
-	pytest -v ./test/test-baggage.py
 	pip uninstall -y $(MODULE)==$(VERSION) || true
 	rm -Rfv $$(find $(MODULE) | awk '/__pycache__$$/')
 	rm -Rfv $$(find ./aoc | awk '/__pycache__$$/')

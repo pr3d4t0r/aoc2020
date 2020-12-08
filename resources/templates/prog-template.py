@@ -2,9 +2,9 @@
 # vim: set fileencoding=utf-8:
 
 
-from typing import Any
-from typing import List
 from util import mainStart
+
+import fileinput
 
 
 # +++ constants +++
@@ -13,11 +13,14 @@ from util import mainStart
 # *** functions ***
 
 def loadExerciseDataFrom(fileName: str) -> list:
-    open(fileName, 'r').close()
+    data = [ line.strip() for line in fileinput.input(fileName) ]
 
-    data:List[Any] = list()
+    tokens = list()
 
-    return data
+    for line in data:
+        tokens.extend(line.split())
+
+    return data, tokens
 
 
 def resolvePuzzle01Using(data):

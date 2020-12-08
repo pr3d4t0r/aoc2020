@@ -4,10 +4,12 @@
 
 from util import mainStart
 
+import re
+
 
 # +++ constants +++
 
-INITIAL_SEARCH_TOKEN = 'shiny gold bag'
+TARGET_BAG_TYPE = 'shiny gold'
 TOKEN_DELIMITER = 'contain'
 
 
@@ -19,44 +21,58 @@ def loadExerciseDataFrom(fileName: str) -> list:
     return data
 
 
-def __extractFrom(text):
-   ptr = text.index(TOKEN_DELIMITER)-2
+def _defineRulesFrom(data) -> dict:
+    regexBags = re.compile('([0-9]+) ([a-z ]+) bags?')
 
-   token = text[:ptr]
+    rules = dict()
+    for line in data:
+        container = line[:line.find(' bags contain '):]
+        rules[container] = dict()
 
-   return token
+        if 'contain no other bags' in line:
+            continue
 
+        for match in re.findall(regexBags, line):
+            rules[container][match[1]] = int(match[0])
 
+    return rules
 
-def searchBagPolicy(searchToken, data, validContainers):
-    for datum in data:
-        if searchToken in datum and searchToken != datum[:len(searchToken)]:
-            validContainers.append(datum)
-
-    return validContainers
-    
 
 def resolvePuzzle01Using(data):
-    validContainers = list()
-    searchToken     = INITIAL_SEARCH_TOKEN
+    rules = _defineRulesFrom(data)
+    shinyGoldBagContainers = [ TARGET_BAG_TYPE, ]
+    maxContainers = -1
 
-    while searchToken:
-        intermediateResults = searchBagPolicy(searchToken, data)
+    while maxContainers != len(shinyGoldBagContainers):
+        maxContainers = len(shinyGoldBagContainers)
+        for rule in rules:
+            for bagContainer in rules[rule]:
+                if bagContainer in shinyGoldBagContainers and rule not in shinyGoldBagContainers:
+                        shinyGoldBagContainers.append(rule)
 
-        if intermediateResults:
-            validContainers.extend(intermediateResults)
-        else:
-            searchToken = None
+    shinyGoldBagContainers.remove(TARGET_BAG_TYPE)
 
-        for result in intermediateResults:
-            searchToken = __extractFrom(result)
+    return len(shinyGoldBagContainers), rules
 
-    return -1
+
+def _resolveInnerBagsWith(rules, bagType):
+    total:int = 0
+
+    if not rules[bagType]:
+        rules[bagType] = 0
+
+    if isinstance(rules[bagType], dict):
+        total = sum(((_resolveInnerBagsWith(rules, bagRule)+1)*rules[bagType][bagRule] for bagRule in rules[bagType]))
+        rules[bagType] = total
+    else:
+        return rules[bagType]
+
+    return total
 
 
 def resolvePuzzle02Using(data):
-    return -1
-
+    rules = _defineRulesFrom(data)
+    return _resolveInnerBagsWith(rules, TARGET_BAG_TYPE)
 
 
 def main(fileName:str = None):
@@ -64,7 +80,8 @@ def main(fileName:str = None):
 
     data = loadExerciseDataFrom(fileName)
 
-    answer1 = resolvePuzzle01Using(data)
+    answer1, \
+    rules = resolvePuzzle01Using(data)
     answer2 = resolvePuzzle02Using(data)
 
     print('answer 1: %d' % answer1)

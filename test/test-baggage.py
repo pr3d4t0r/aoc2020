@@ -2,11 +2,13 @@
 # vim: set fileencoding=utf-8:
 
 
+from aoc.baggage import TARGET_BAG_TYPE
+from aoc.baggage import _defineRulesFrom
+from aoc.baggage import _resolveInnerBagsWith
 from aoc.baggage import loadExerciseDataFrom
 from aoc.baggage import main
 from aoc.baggage import resolvePuzzle01Using
 from aoc.baggage import resolvePuzzle02Using
-from aoc.baggage import __extractFrom
 
 import pytest
 
@@ -29,7 +31,8 @@ TEST_RAW_DATA = [
 
 # +++ tests +++
 
-_data = None  # a collection
+_data = None
+_rules = None
 
 
 def test_loadExerciseDataFrom():
@@ -41,34 +44,35 @@ def test_loadExerciseDataFrom():
     assert len(_data) == len(TEST_RAW_DATA)
 
 
-def test___extractFrom():
-    test0 = 'dark orange bag'
-    test1 = 'dotted black bag'
-    assert __extractFrom(TEST_RAW_DATA[1])
-    assert __extractFrom(TEST_RAW_DATA[8])
+def test__defineRulesFrom():
+    rules = _defineRulesFrom(_data)
+
+    assert len(rules) == 9
+    assert 'shiny gold' in rules
+    assert 'vibrant plum' in rules['shiny gold']
 
 
 def test_resolvePuzzle01Using():
-    x = resolvePuzzle01Using(_data)
+    global _rules
 
-    assert x == -1
+    answer, \
+    _rules = resolvePuzzle01Using(_data)
+
+    assert answer == 4
+
+
+def test__resolveInnerBagsIn():
+    result = _resolveInnerBagsWith(_rules, TARGET_BAG_TYPE)
+
+    assert result
 
 
 def test_resolvePuzzle02Using():
-    x = resolvePuzzle02Using(_data)
+    result = resolvePuzzle02Using(_data)
 
-    assert x == -1
+    assert 32 == result
 
 
 def test_main():
-    assert main(TEST_BAGGAGE_FILE_NAME) == (-1, -1)
-
-
-# TODO: --- remove before final check-in ---
-
-test_loadExerciseDataFrom()
-# test___extractFrom()
-test_resolvePuzzle01Using()
-# test_resolvePuzzle02Using()
-# test_main()
+    assert main(TEST_BAGGAGE_FILE_NAME) == (4, 32)
 
