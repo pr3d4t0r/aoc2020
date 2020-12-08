@@ -2,9 +2,8 @@
 # vim: set fileencoding=utf-8:
 
 
+from util import loadExerciseDataFrom
 from util import mainStart
-
-import fileinput
 
 
 # +++ constants +++
@@ -12,22 +11,18 @@ import fileinput
 
 # *** functions ***
 
-def loadExerciseDataFrom(fileName: str) -> list:
-    data = [ line.strip() for line in fileinput.input(fileName) ]
+def resolvePuzzle01Using(data, tokens):
+    # TODO: remove this before pull request
+    # ---- cut here ----
+    for seq, item in enumerate(data):
+        print('%04d | %s' % (seq, item))
+    print()
+    # ---- cut here ----
 
-    tokens = list()
-
-    for line in data:
-        tokens.extend(line.split())
-
-    return data, tokens
-
-
-def resolvePuzzle01Using(data):
     return -1
 
 
-def resolvePuzzle02Using(data):
+def resolvePuzzle02Using(data, tokens):
     return -1
 
 
@@ -35,10 +30,10 @@ def resolvePuzzle02Using(data):
 def main(fileName:str = None):
     fileName = mainStart(fileName, %d%)
 
-    data = loadExerciseDataFrom(fileName)
+    data, tokens = loadExerciseDataFrom(fileName)
 
-    answer1 = resolvePuzzle01Using(data)
-    answer2 = resolvePuzzle02Using(data)
+    answer1 = resolvePuzzle01Using(data, tokens)
+    answer2 = resolvePuzzle02Using(data, tokens)
 
     print('answer 1: %d' % answer1)
     print('answer 2: %d' % answer2)

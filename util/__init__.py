@@ -4,6 +4,7 @@
 
 from typing import Optional
 
+import fileinput
 import sys
 
 
@@ -25,4 +26,16 @@ def mainStart(fileName:str, dayAoC:int) -> str:
     print('*** AoC Day %d ***\n' % dayAoC)
 
     return fileName
+
+
+def loadExerciseDataFrom(fileName: str) -> list:
+    data = [ line.strip() for line in fileinput.input(fileName) ]
+
+    tokens = list()
+
+    for line in data:
+        tokens.extend(line.split())
+
+    return data, tokens
+
 

@@ -17,29 +17,19 @@ TEST_%T%_FILE_NAME = 'resources/test/%t%-test-data.txt'
 
 # +++ tests +++
 
-_data = None  # a collection
-_tokens = None
-
-
-def test_loadExerciseDataFrom():
-    global _data
-
-    _data, tokens = loadExerciseDataFrom(TEST_%T%_FILE_NAME)
-
-    assert len(_data)
-    assert len(_tokens)
+_data, _tokens = loadExerciseDataFrom(TEST_%T%_FILE_NAME)
 
 
 def test_resolvePuzzle01Using():
-    x = resolvePuzzle01Using(_data)
+    answer = resolvePuzzle01Using(_data, _tokens)
 
-    assert x == -1
+    assert answer == -1
 
 
 def test_resolvePuzzle02Using():
-    x = resolvePuzzle02Using(_data)
+    answer = resolvePuzzle02Using(_data, _tokens)
 
-    assert x == -1
+    assert answer == -1
 
 
 def test_main():
