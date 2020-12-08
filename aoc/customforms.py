@@ -10,6 +10,9 @@ a_OFFSET = ord('a')
 
 # +++ constants +++
 
+
+# *** functions ***
+
 def loadExerciseDataFrom(fileName) -> list:
     # return [f.replace('\n', '') for f in ( b for b in open(fileName, 'r').read().split('\n\n') if len(b) )]
     return [ b for b in open(fileName, 'r').read().split('\n\n') if len(b) ]
@@ -24,7 +27,7 @@ def confirmedMixedAnswers(groupsData:list):
 
         results.append(groupAnswers)
 
-    allCounts = sum([ sum(result) for result in results ])
+    allCounts = sum(( sum(result) for result in results ))
 
     return allCounts
 
@@ -44,12 +47,10 @@ def confirmedGroupAnswers(groupsData:list):
         results.append(groupAnswers)
 
 
-    accurateCounts = sum([ sum(result) for result in results ])
+    accurateCounts = sum(( sum(result) for result in results ))
 
     return accurateCounts
 
-
-# *** functions ***
 
 def main(fileName:str = None):
     fileName = mainStart(fileName, 5)
