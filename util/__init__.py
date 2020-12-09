@@ -2,8 +2,6 @@
 # vim: set fileencoding=utf-8:
 
 
-from typing import Optional
-
 import fileinput
 import sys
 
@@ -28,8 +26,11 @@ def mainStart(fileName:str, dayAoC:int) -> str:
     return fileName
 
 
-def loadExerciseDataFrom(fileName: str) -> list:
-    data = [ line.strip() for line in fileinput.input(fileName) ]
+def loadExerciseDataFrom(fileName: str, allowEmptyLines = False) -> list:
+    if allowEmptyLines:
+        data = [ line.strip() for line in fileinput.input(fileName) ]
+    else:
+        data = [ line.strip() for line in fileinput.input(fileName) if len(line) > 0 ]
 
     tokens = list()
 
