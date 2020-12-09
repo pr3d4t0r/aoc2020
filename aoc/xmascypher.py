@@ -35,27 +35,52 @@ def resolvePuzzle01Using(data, tokens, preambleLength):
     return item, data
 
 
+# ------------------------------------------------------------------------------
+# I went for a hard break out of the inner loop at first, decided
+# to fix it later but leave this one up.  In the rush to submit as early as
+# possible I went for the hard break instead of a clean exit.
+# ------------------------------------------------------------------------------
+# def resolvePuzzle02Using(data, tokens, preambleLength, vulnerability):
+#     limit = data.index(vulnerability)
+#     weakness = -1
+#     tail = 0
+# 
+#     try:
+#         while tail < limit:
+#             for head in range(tail+2, limit):
+#                 y = data[tail:head]
+#                 testValue = sum(data[tail:head])
+#                 if testValue == vulnerability:
+#                     raise Exception
+#                 if testValue > vulnerability:
+#                     break
+# 
+#             tail += 1
+#     except:
+#         weakness = min(data[tail:head])+max(data[tail:head])
+# 
+#     return weakness
+# 
+# 
+# 
 def resolvePuzzle02Using(data, tokens, preambleLength, vulnerability):
     limit = data.index(vulnerability)
     weakness = -1
     tail = 0
 
-    try:
-        while tail < limit:
-            for head in range(tail+2, limit):
-                y = data[tail:head]
-                testValue = sum(data[tail:head])
-                if testValue == vulnerability:
-                    raise Exception
-                if testValue > vulnerability:
-                    break
+    while tail < limit:
+        for head in range(tail+2, limit):
+            testValue = sum(data[tail:head])
+            if testValue == vulnerability:
+                weakness = min(data[tail:head])+max(data[tail:head])
+                tail = limit
+                break
+            if testValue > vulnerability:
+                break
 
-            tail += 1
-    except:
-        weakness = min(data[tail:head])+max(data[tail:head])
+        tail += 1
 
     return weakness
-
 
 
 def main(fileName:str = None, preambleLength = PREAMBLE_LENGTH):
