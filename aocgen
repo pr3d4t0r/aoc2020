@@ -8,6 +8,7 @@
 CODE_DIR="./aoc"
 DATA_DIR="./resources"
 DAY=$(date +%d)
+DAY=$((++DAY))
 PROGRAM_TEMPLATE="$DATA_DIR/templates/prog-template.py"
 TEST_DATA_DIR="$DATA_DIR/test"
 TEST_DIR="./test"
