@@ -1,1 +1,0 @@
-resources/test/baggage-test-data.txt
