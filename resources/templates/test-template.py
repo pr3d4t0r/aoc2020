@@ -38,7 +38,6 @@ def test_main():
 
 # TODO: --- remove before final check-in ---
 
-# test_loadExerciseDataFrom()
 # test_resolvePuzzle01Using()
 # test_resolvePuzzle02Using()
 # test_main()
