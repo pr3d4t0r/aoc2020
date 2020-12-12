@@ -2,11 +2,11 @@
 # vim: set fileencoding=utf-8:
 
 
-from util import loadExerciseDataFrom
-from util import mainStart
-
 from collections import Counter
 from functools import lru_cache
+
+from util import loadExerciseDataFrom
+from util import mainStart
 
 
 # +++ constants +++
