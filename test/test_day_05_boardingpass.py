@@ -2,12 +2,12 @@
 # vim: set fileencoding=utf-8:
 
 
-from aoc.boardingpass import _colFrom
-from aoc.boardingpass import _rowFrom
-from aoc.boardingpass import _seatInfo
-from aoc.boardingpass import findHighestIDIn
-from aoc.boardingpass import loadBoardingPassesFrom
-from aoc.boardingpass import main
+from aoc.day_05_boardingpass import _colFrom
+from aoc.day_05_boardingpass import _rowFrom
+from aoc.day_05_boardingpass import _seatInfo
+from aoc.day_05_boardingpass import findHighestIDIn
+from aoc.day_05_boardingpass import loadBoardingPassesFrom
+from aoc.day_05_boardingpass import main
 
 
 # +++ constants +++

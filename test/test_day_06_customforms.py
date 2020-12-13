@@ -2,10 +2,10 @@
 # vim: set fileencoding=utf-8:
 
 
-from aoc.customforms import loadExerciseDataFrom
-from aoc.customforms import main
-from aoc.customforms import confirmedMixedAnswers
-from aoc.customforms import confirmedGroupAnswers
+from aoc.day_06_customforms import loadExerciseDataFrom
+from aoc.day_06_customforms import main
+from aoc.day_06_customforms import confirmedMixedAnswers
+from aoc.day_06_customforms import confirmedGroupAnswers
 
 import pytest
 
@@ -21,7 +21,6 @@ _groupData = None
 
 
 def test_loadExerciseDataFrom():
-    # TODO: update template
     global _groupData
 
     _groupData = loadExerciseDataFrom(TEST_CUSTOMFORMS_FILE_NAME)

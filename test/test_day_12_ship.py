@@ -2,10 +2,10 @@
 # vim: set fileencoding=utf-8:
 
 
-from aoc.ship import loadExerciseDataFrom
-from aoc.ship import main
-from aoc.ship import resolvePuzzle01Using
-from aoc.ship import resolvePuzzle02Using
+from aoc.day_12_ship import loadExerciseDataFrom
+from aoc.day_12_ship import main
+from aoc.day_12_ship import resolvePuzzle01Using
+from aoc.day_12_ship import resolvePuzzle02Using
 
 import pytest
 

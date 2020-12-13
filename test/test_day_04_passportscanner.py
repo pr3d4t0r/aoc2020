@@ -1,17 +1,17 @@
 # See: https://github.com/pr3d4t0r/aoc2020/blob/0001-AoC-day-2/LICENSE
 # vim: set fileencoding=utf-8:
 
-from aoc.passportscanner import _assertEyeColor
-from aoc.passportscanner import _assertHairColor
-from aoc.passportscanner import _assertHeight
-from aoc.passportscanner import _assertPassportID
-from aoc.passportscanner import _assertValidYearRangeFor
-from aoc.passportscanner import _convertRawDataToDict
-from aoc.passportscanner import countValidIn
-from aoc.passportscanner import isValidPassport
-from aoc.passportscanner import isValidPassportStrict
-from aoc.passportscanner import loadPassportsFrom
-from aoc.passportscanner import main
+from aoc.day_04_passportscanner import _assertEyeColor
+from aoc.day_04_passportscanner import _assertHairColor
+from aoc.day_04_passportscanner import _assertHeight
+from aoc.day_04_passportscanner import _assertPassportID
+from aoc.day_04_passportscanner import _assertValidYearRangeFor
+from aoc.day_04_passportscanner import _convertRawDataToDict
+from aoc.day_04_passportscanner import countValidIn
+from aoc.day_04_passportscanner import isValidPassport
+from aoc.day_04_passportscanner import isValidPassportStrict
+from aoc.day_04_passportscanner import loadPassportsFrom
+from aoc.day_04_passportscanner import main
 
 import pytest
 

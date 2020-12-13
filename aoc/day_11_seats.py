@@ -234,7 +234,7 @@ def main(fileName:str = None):
     print('answer 1: %d in %d rounds' % (answer1, totalRounds))
 
     answer2, totalRounds = resolvePuzzle02Using(data, tokens)
-    print('answer 2: %d' % answer2)
+    print('answer 2: %d in %d rounds' % (answer2, totalRounds))
 
     return answer1, answer2
 

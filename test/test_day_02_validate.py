@@ -2,10 +2,10 @@
 # vim: set fileencoding=utf-8:
 
 
-from aoc.validate import extractPasswordsFrom
-from aoc.validate import main
-from aoc.validate import meetsOldPolicy
-from aoc.validate import meetsPolicy
+from aoc.day_02_validate import extractPasswordsFrom
+from aoc.day_02_validate import main
+from aoc.day_02_validate import meetsOldPolicy
+from aoc.day_02_validate import meetsPolicy
 
 
 # +++ constants +++
