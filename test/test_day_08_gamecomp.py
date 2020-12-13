@@ -2,10 +2,10 @@
 # vim: set fileencoding=utf-8:
 
 
-from aoc.gamecomp import loadExerciseDataFrom
-from aoc.gamecomp import main
-from aoc.gamecomp import resolvePuzzle01Using
-from aoc.gamecomp import resolvePuzzle02Using
+from aoc.day_08_gamecomp import loadExerciseDataFrom
+from aoc.day_08_gamecomp import main
+from aoc.day_08_gamecomp import resolvePuzzle01Using
+from aoc.day_08_gamecomp import resolvePuzzle02Using
 
 
 # +++ constants +++

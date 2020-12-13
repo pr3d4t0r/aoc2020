@@ -55,7 +55,7 @@ function initUnitTestsFor {
     local unitTest
     local progName="$1"
 
-    unitTest="$TEST_DIR/test-$1.py"
+    unitTest="$TEST_DIR/test_$1.py"
 
     cat "$UNIT_TEST_TEMPLATE" | awk -v "t=$progName" 'BEGIN { tU=toupper(t); } { gsub("%t%", t); gsub("%T%", tU); print; }' > "$unitTest"
 
@@ -83,12 +83,13 @@ function initDataFilesFor {
 # +++ main +++
 
 assertProgramNameIn "$1"
-programName="$1"
+programName=$(awk -v "d=$DAY" -v "n=$1" 'BEGIN { printf("day_%2d_%s", d, n); }')
 
 initCodeFor "$programName"
 initUnitTestsFor "$programName"
 initDataFilesFor "$programName"
 
-# cat $(grep -lr "TODO:" . | awk '!/site-packages/ && !/\.swp/ && !/-template/ && !/aocgen/') | awk '/TODO:/'
+cat $(grep -lr "TODO:" . | awk '!/site-packages/ && !/\.swp/ && !/-template/ && !/aocgen/') | awk '/TODO/'
+
 echo '-- done!'
 

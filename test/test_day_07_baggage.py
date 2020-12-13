@@ -2,13 +2,13 @@
 # vim: set fileencoding=utf-8:
 
 
-from aoc.baggage import TARGET_BAG_TYPE
-from aoc.baggage import _defineRulesFrom
-from aoc.baggage import _resolveInnerBagsWith
-from aoc.baggage import loadExerciseDataFrom
-from aoc.baggage import main
-from aoc.baggage import resolvePuzzle01Using
-from aoc.baggage import resolvePuzzle02Using
+from aoc.day_07_baggage import TARGET_BAG_TYPE
+from aoc.day_07_baggage import _defineRulesFrom
+from aoc.day_07_baggage import _resolveInnerBagsWith
+from aoc.day_07_baggage import loadExerciseDataFrom
+from aoc.day_07_baggage import main
+from aoc.day_07_baggage import resolvePuzzle01Using
+from aoc.day_07_baggage import resolvePuzzle02Using
 
 import pytest
 

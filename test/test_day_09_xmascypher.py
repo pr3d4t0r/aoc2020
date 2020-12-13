@@ -2,10 +2,10 @@
 # vim: set fileencoding=utf-8:
 
 
-from aoc.xmascypher import loadExerciseDataFrom
-from aoc.xmascypher import main
-from aoc.xmascypher import resolvePuzzle01Using
-from aoc.xmascypher import resolvePuzzle02Using
+from aoc.day_09_xmascypher import loadExerciseDataFrom
+from aoc.day_09_xmascypher import main
+from aoc.day_09_xmascypher import resolvePuzzle01Using
+from aoc.day_09_xmascypher import resolvePuzzle02Using
 
 import pytest
 
@@ -41,11 +41,4 @@ def test_resolvePuzzle02Using():
 
 def test_main():
     assert main(TEST_XMASCYPHER_FILE_NAME, preambleLength = TEST_PREAMBLE_LENGTH) == (127, 62)
-
-
-# TODO: --- remove before final check-in ---
-
-# test_resolvePuzzle01Using()
-test_resolvePuzzle02Using()
-# test_main()
 

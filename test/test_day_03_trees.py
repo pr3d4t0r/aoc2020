@@ -2,10 +2,10 @@
 # vim: set fileencoding=utf-8:
 
 
-from aoc.trees import calculateAllImpactsUsing
-from aoc.trees import calculateImpactsFrom
-from aoc.trees import loadMapFrom
-from aoc.trees import main
+from aoc.day_03_trees import calculateAllImpactsUsing
+from aoc.day_03_trees import calculateImpactsFrom
+from aoc.day_03_trees import loadMapFrom
+from aoc.day_03_trees import main
 
 
 # +++ constants +++

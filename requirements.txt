@@ -1,2 +1,5 @@
 bitarray
 mypy
+numpy
+pandas
+scipy

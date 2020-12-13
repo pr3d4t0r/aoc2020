@@ -2,10 +2,10 @@
 # vim: set fileencoding=utf-8:
 
 
-from aoc.expenses import find2020ThreeEntriesProductIn
-from aoc.expenses import find2020TwoEntriesProductIn
-from aoc.expenses import loadExpensesFrom
-from aoc.expenses import main
+from aoc.day_01_expenses import find2020ThreeEntriesProductIn
+from aoc.day_01_expenses import find2020TwoEntriesProductIn
+from aoc.day_01_expenses import loadExpensesFrom
+from aoc.day_01_expenses import main
 
 
 # --- constants ---

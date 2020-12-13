@@ -2,16 +2,16 @@
 # vim: set fileencoding=utf-8:
 
 
-from aoc.seats import loadExerciseDataFrom
-from aoc.seats import main
-from aoc.seats import resolvePuzzle01Using
-from aoc.seats import resolvePuzzle02Using
-from aoc.seats import _getAdjacentPositionsTo
-from aoc.seats import _applyRule1To
-from aoc.seats import _applyRule2To
-from aoc.seats import _assertNoChangeIn
-# from aoc.seats import _getLoSPositions
-# from aoc.seats import _findSeatPositionsFrom
+from aoc.day_11_seats import loadExerciseDataFrom
+from aoc.day_11_seats import main
+from aoc.day_11_seats import resolvePuzzle01Using
+from aoc.day_11_seats import resolvePuzzle02Using
+from aoc.day_11_seats import _getAdjacentPositionsTo
+from aoc.day_11_seats import _applyRule1To
+from aoc.day_11_seats import _applyRule2To
+from aoc.day_11_seats import _assertNoChangeIn
+# from aoc.day_11_seats import _getLoSPositions
+# from aoc.day_11_seats import _findSeatPositionsFrom
 
 import copy
 
@@ -144,15 +144,4 @@ def test_resolvePuzzle02Using():
 
 def test_main():
     assert main(TEST_SEATS_FILE_NAME) == (37, 26)
-
-# TODO: --- remove before final check-in ---
-
-# test__getAdjacentPositionsTo()
-# test__applyRule1To()
-# test__applyRule2To()
-# test_resolvePuzzle01Using()
-# test__getLoSPositions()
-# test__findSeatPositionsFrom()
-# test_resolvePuzzle02Using()
-# test_main()
 

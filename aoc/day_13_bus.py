@@ -29,16 +29,16 @@ def resolvePuzzle02Using(busSchedule):
     # https://crypto.stanford.edu/pbc/notes/numbertheory/crt.html
 
     earliestDeparture = 0
-    runningProduct = 1
+    deltaProduct = 1
 
-    for t, busID in enumerate(busSchedule):
+    for seq, busID in enumerate(busSchedule):
         if busID == -1:
             continue
 
-        while (t+earliestDeparture)%busID != 0:
-            earliestDeparture += runningProduct
+        while (seq+earliestDeparture)%busID != 0: # sieve through
+            earliestDeparture += deltaProduct
 
-        runningProduct *= busID
+        deltaProduct *= busID
 
     return earliestDeparture
 
@@ -50,7 +50,6 @@ def main(fileName:str = None):
 
     earliestDeparture = int(data[0])
     busSchedule = [int(busID) for busID in data[1].split(',') if busID != 'x']
-
     answer1, _ = resolvePuzzle01Using(earliestDeparture, busSchedule)
 
     busSchedule = [int(busID) if busID != 'x' else -1 for busID in data[1].split(',')]
