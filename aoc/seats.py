@@ -71,8 +71,6 @@ def _applyRule2To(l, adjacent, seats):
 
 
 def _assertNoChangeIn(now, future):
-    result = False
-
     t = all(row in future for row in now)
 
     return t
@@ -159,26 +157,6 @@ def resolvePuzzle01Using(data, tokens):
 #     return seatPositions
 
 
-def _findFirstInLine(xStart, yStart, seats, deltaX, deltaY):
-    """
-        Returns the first visible seat position regardless of state,
-        or None.
-
-        deltaX, deltaY ::= incremental step to control direction:  -1 left, up,
-        +1 right, down, 0 don't change.
-    """
-    xTest = xStart+deltaX
-    yTest = yStart+deltaY
-
-    if xTest not in range(len(seats[0])) or yTest not in range(len(seats)):
-        return None
-
-    if seats[yTest][xTest] in ['L', '#']:
-        return xTest, yTest
-    else:
-        return _findFirstInLine(xTest, yTest, seats, deltaX, deltaY)
-
-
 def resolvePuzzle02Using(data, tokens):
     allSeated = False
     seatsNow = copy.deepcopy(data)
@@ -186,6 +164,27 @@ def resolvePuzzle02Using(data, tokens):
 
     linesOfSight = [ (0, -1), (1, -1), (1, 0), (1, 1),
                      (0, 1), (-1, 1), (-1, 0), (-1, -1), ]
+
+
+    def _findFirstInLine(xStart, yStart, deltaX, deltaY):
+        """
+            Returns the first visible seat position regardless of state,
+            or None.
+
+            deltaX, deltaY ::= incremental step to control direction:  -1 left, up,
+            +1 right, down, 0 don't change.
+        """
+        xTest = xStart+deltaX
+        yTest = yStart+deltaY
+
+        if xTest not in range(len(seatsNow[0])) or yTest not in range(len(seatsNow)):
+            return None
+
+        if seatsNow[yTest][xTest] in ['L', '#']:
+            return xTest, yTest
+        else:
+            return _findFirstInLine(xTest, yTest, deltaX, deltaY)
+
 
     totalRounds = 1
     while not allSeated:
@@ -195,7 +194,7 @@ def resolvePuzzle02Using(data, tokens):
                 if state == '.': continue
                 visibleSeats = list()
                 for linePath in linesOfSight:
-                    location = _findFirstInLine(x, y, seatsNow, linePath[0], linePath[1])
+                    location = _findFirstInLine(x, y, linePath[0], linePath[1])
                     visibleSeats.append(location)
 
                 visibleSeats = [ visible for visible in visibleSeats if visible ]

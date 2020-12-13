@@ -15,8 +15,6 @@ from aoc.seats import _assertNoChangeIn
 
 import copy
 
-import pytest
-
 
 # +++ constants +++
 
