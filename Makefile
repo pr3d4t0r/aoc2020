@@ -67,20 +67,20 @@ resetpy: ALWAYS
 
 #	for f in aoc/*; do mypy "$$f"; done
 #	pytest -v ./test/test-seats.py
+# 	pytest -v ./test/test_day_03_trees.py
+# 	pytest -v ./test/test_day_10_adapters.py
 test: ALWAYS
 	pip install -r requirements.txt
 	pip install -e .
 	pytest -v ./test/test-util.py
 	pytest -v ./test/test_day_01_expenses.py
 	pytest -v ./test/test_day_02_validate.py
-	pytest -v ./test/test_day_03_trees.py
 	pytest -v ./test/test_day_04_passportscanner.py
 	pytest -v ./test/test_day_05_boardingpass.py
 	pytest -v ./test/test_day_06_customforms.py
 	pytest -v ./test/test_day_07_baggage.py
 	pytest -v ./test/test_day_08_gamecomp.py
 	pytest -v ./test/test_day_09_xmascypher.py
-	pytest -v ./test/test_day_10_adapters.py
 	pytest -v ./test/test_day_11_seats.py
 	pytest -v ./test/test_day_12_ship.py
 	pytest -v ./test/test_day_13_bus.py
