@@ -1,4 +1,5 @@
 bitarray
+more-itertools
 mypy
 numpy
 pandas
