@@ -29,7 +29,6 @@ def test_resolvePuzzle01Using():
 def test_resolvePuzzle02Using():
     global _data, _tokens
 
-    _data, _tokens = loadExerciseDataFrom(TEST_DAY_17_CONWAYCUBES_FILE_NAME)
     answer = resolvePuzzle02Using(_data, _tokens, unitTest = True)
 
     assert answer == 848
@@ -38,8 +37,6 @@ def test_resolvePuzzle02Using():
 def test_main():
     global _data, _tokens
 
-    _data, _tokens = loadExerciseDataFrom(TEST_DAY_17_CONWAYCUBES_FILE_NAME)
-
     assert main(TEST_DAY_17_CONWAYCUBES_FILE_NAME, unitTest = True) == (112, 848)
 
 
@@ -47,5 +44,5 @@ def test_main():
 
 # test_resolvePuzzle01Using()
 # test_resolvePuzzle02Using()
-test_main()
-
+# test_main()
+# 

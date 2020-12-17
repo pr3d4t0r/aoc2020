@@ -21,26 +21,19 @@ import numpy as np
 
 # *** functions ***
 
-def resolvePuzzle01Using(data, tokens, maxCycles = 6, dimensions = 3, shape = 20, unitTest = False):
-    data = np.array([[cube == '#' for cube in row] for row in data])
-    shape = 15 if unitTest else 20
-    
+def resolvePuzzle01Using(data, tokens, maxCycles = 6, dimensions = 3, shape = 20):
+    dSlice = np.ones(tuple(3 for d in range(dimensions)))
+    dSlice[tuple(1 for d in range(dimensions))] = 0
+    data = np.array([[cube == '#' for cube in row] for row in tokens])
 
-    KERNEL = np.ones(tuple(3 for _ in range(dimensions)))
-    KERNEL[tuple(1 for _ in range(dimensions))] = 0
+    activeCubesSpace = np.zeros((*(13 for d in range(dimensions - 2)), shape, shape), dtype=int)
+    activeCubesSpace[tuple(maxCycles for d in range(dimensions - 2))] = np.pad(data, maxCycles)
 
-    # universe = np.zeros((*(13 for _ in range(n - 2)), 20, 20), dtype=int)
-    # p1 -> universe = np.zeros((*(13 for _ in range(dimensions - 2)), 20, 20), dtype=int)
-    # >> try >> universe = np.zeros((*(13 for _ in range(dimensions - 2)), 26, 26), dtype=int)
-    # p2 -> universe = np.zeros((*(13 for _ in range(dimensions - 2)), 15, 15), dtype=int)
-    universe = np.zeros((*(13 for _ in range(dimensions - 2)), shape, shape), dtype=int)
-    universe[tuple(maxCycles for _ in range(dimensions - 2))] = np.pad(data, maxCycles)
+    for cycle in range(maxCycles):
+        neighbors = convolve(activeCubesSpace, dSlice, mode='constant', cval = 0)
+        activeCubesSpace = np.where((neighbors == 3) | (activeCubesSpace & (neighbors==2)), 1, 0)
 
-    for _ in range(maxCycles):
-        neighbors = convolve(universe, KERNEL, mode="constant")
-        universe = np.where((neighbors == 3) | (universe & (neighbors==2)), 1, 0)
-
-    return universe.sum()
+    return activeCubesSpace.sum()
 
 
 def resolvePuzzle02Using(data, tokens, unitTest = False):
@@ -52,19 +45,19 @@ def resolvePuzzle02Using(data, tokens, unitTest = False):
 
 def main(fileName:str = None, unitTest = False):
     fileName = mainStart(fileName, 17)
+    shape = 15 if unitTest else 20
 
     data, tokens = loadExerciseDataFrom(fileName)
 
     # ------------------------------------------
     # Answer 1
     # ------------------------------------------
-    answer1 = resolvePuzzle01Using(data, tokens, 6, 3, 20, unitTest)
+    answer1 = resolvePuzzle01Using(data, tokens, 6, 3, shape)
     print('answer 1: %d' % answer1)
 
     # ------------------------------------------
     # Answer 2
     # ------------------------------------------
-    data, tokens = loadExerciseDataFrom(fileName)
     answer2 = resolvePuzzle02Using(data, tokens, unitTest)
     print('answer 2: %d' % answer2)
 
