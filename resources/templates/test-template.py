@@ -7,8 +7,6 @@ from aoc.%t% import main
 from aoc.%t% import resolvePuzzle01Using
 from aoc.%t% import resolvePuzzle02Using
 
-import pytest
-
 
 # +++ constants +++
 
