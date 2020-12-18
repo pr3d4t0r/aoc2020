@@ -47,47 +47,25 @@ def _evaluateExpression(terms, precedenceFlag = True):
 
         ptr += 1
 
-    while(opStack):
-        outputQueue.append(opStack.pop())
+    while(opStack): outputQueue.append(opStack.pop())
 
     if precedenceFlag:
         for term in outputQueue:
-            if term in OPERATIONS:
-                operand1 = opStack.pop()
-                operand0 = opStack.pop()
-                result = OPERATIONS[term](operand0, operand1)
-                opStack.append(result)
-            else:
-                opStack.append(term)
+            opStack.append(OPERATIONS[term](opStack.pop(), opStack.pop()) if term in OPERATIONS else term)
 
         result = opStack.pop()
     else:
         while outputQueue:
-            # Linear is faster since the output queue is also linear.
             t = outputQueue.pop(0)
-            if isinstance(t, int):
-                result = t
-            elif t == '+':
-                result += outputQueue.pop(0)
-            elif t == '*':
-                result *= outputQueue.pop(0)
+            result = t if isinstance(t, int) else OPERATIONS[t](result, outputQueue.pop(0))
 
     return result, ptr
 
 
-def resolvePuzzle01Using(data, tokens):
+def resolvePuzzleUsing(data, tokens, precedenceFlag):
     total = 0
     for seq, item in enumerate(data):
-        result, _ = _evaluateExpression(_tokenizeExpression(item), precedenceFlag = False)
-        total += result
-
-    return total
-
-
-def resolvePuzzle02Using(data, tokens):
-    total = 0
-    for seq, item in enumerate(data):
-        result, _ = _evaluateExpression(_tokenizeExpression(item))
+        result, _ = _evaluateExpression(_tokenizeExpression(item), precedenceFlag)
         total += result
 
     return total
@@ -98,10 +76,10 @@ def main(fileName:str = None):
 
     data, tokens = loadExerciseDataFrom(fileName)
 
-    answer1 = resolvePuzzle01Using(data, tokens)
+    answer1 = resolvePuzzleUsing(data, tokens, False)
     print('answer 1: %d' % answer1)
 
-    answer2 = resolvePuzzle02Using(data, tokens)
+    answer2 = resolvePuzzleUsing(data, tokens, True)
     print('answer 2: %d' % answer2)
 
     return answer1, answer2

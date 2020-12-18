@@ -6,8 +6,7 @@ from aoc.day_18_evalexp import _evaluateExpression
 from aoc.day_18_evalexp import _tokenizeExpression
 from aoc.day_18_evalexp import loadExerciseDataFrom
 from aoc.day_18_evalexp import main
-from aoc.day_18_evalexp import resolvePuzzle01Using
-from aoc.day_18_evalexp import resolvePuzzle02Using
+from aoc.day_18_evalexp import resolvePuzzleUsing
 
 
 # +++ constants +++
@@ -56,12 +55,6 @@ def test__evaluateExpression():
     assert 13632 == result
 
 
-def test_resolvePuzzle01Using():
-    answer = resolvePuzzle01Using(_data, _tokens)
-
-    assert answer == 26386
-
-
 def test__evaluateExpressionReversePrecedence():
     test = '1 + 2 * 3 + 4 * 5 + 6'
     result, _ = _evaluateExpression(_tokenizeExpression(test))
@@ -88,9 +81,11 @@ def test__evaluateExpressionReversePrecedence():
     assert 23340 == result
 
 
-def test_resolvePuzzle02Using():
-    answer = resolvePuzzle02Using(_data, _tokens)
+def test_resolvePuzzleUsing():
+    answer = resolvePuzzleUsing(_data, _tokens, False)
+    assert answer == 26386
 
+    answer = resolvePuzzleUsing(_data, _tokens, True)
     assert answer == 693942
 
 
@@ -98,5 +93,5 @@ def test_main():
     assert main(TEST_DAY_18_EVALEXP_FILE_NAME) == (26386, 693942)
 
 
-test__evaluateExpression()
+test_resolvePuzzleUsing()
 
