@@ -14,7 +14,6 @@ OPERATIONS = {
 }
 
 
-
 # *** functions ***
 
 def _tokenizeExpression(expr):
@@ -24,7 +23,6 @@ def _tokenizeExpression(expr):
 def _evaluateExpression(terms):
     # https://en.wikipedia.org/wiki/Shunting-yard_algorithm
 
-    opStack = list()
     outputQueue = list()
 
     ptr = 0

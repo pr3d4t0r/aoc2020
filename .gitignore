@@ -160,6 +160,9 @@ work/*.json
 **/database/*
 **/work/src/*
 **/.wget-hsts
+**/dummy.*
+**/test.py
+**/test.txt
 
 # Python virtual environment
 
