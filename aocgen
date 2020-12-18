@@ -80,6 +80,15 @@ function initDataFilesFor {
 } # initDataFilesFor
 
 
+function bumpRevisionID {
+    local versionFile="./version.txt"
+    local newVersion=$(awk -F "\." -v "DAY=$DAY" '{ printf("%d.%d.%d", $1, $2, DAY); }' "$versionFile")
+
+    echo "$newVersion" > "$versionFile"
+    echo "-- version: bumped to " $(cat "$versionFile")
+} # bumpRevisionID
+
+
 # +++ main +++
 
 assertProgramNameIn "$1"
@@ -88,6 +97,7 @@ programName=$(awk -v "d=$DAY" -v "n=$1" 'BEGIN { printf("day_%2d_%s", d, n); }')
 initCodeFor "$programName"
 initUnitTestsFor "$programName"
 initDataFilesFor "$programName"
+bumpRevisionID
 
 cat $(grep -lr "TODO:" . | awk '!/site-packages/ && !/\.swp/ && !/-template/ && !/aocgen/') | awk '/TODO/'
 
