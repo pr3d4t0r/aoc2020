@@ -3,7 +3,6 @@
 
 
 from aoc.day_18_evalexp import _evaluateExpression
-from aoc.day_18_evalexp import _evaluateExpressionReversePrecedence
 from aoc.day_18_evalexp import _tokenizeExpression
 from aoc.day_18_evalexp import loadExerciseDataFrom
 from aoc.day_18_evalexp import main
@@ -33,27 +32,27 @@ def test__tokenizeExpression():
 
 def test__evaluateExpression():
     test = '2 * 3 + 4 * 5'
-    result, _ = _evaluateExpression(_tokenizeExpression(test))
+    result, _ = _evaluateExpression(_tokenizeExpression(test), False)
     assert 50 == result
 
     test = '2 * 3 + (4 * 5)'
-    result, _ = _evaluateExpression(_tokenizeExpression(test))
+    result, _ = _evaluateExpression(_tokenizeExpression(test), False)
     assert 26 == result
 
     test = '1 + (2 * 3) + (4 * (5 + 6))'
-    result, _ = _evaluateExpression(_tokenizeExpression(test))
+    result, _ = _evaluateExpression(_tokenizeExpression(test), False)
     assert 51 == result
 
     test = '5 + (8 * 3 + 9 + 3 * 4 * 3)'
-    result, _ = _evaluateExpression(_tokenizeExpression(test))
+    result, _ = _evaluateExpression(_tokenizeExpression(test), False)
     assert 437 == result
 
     test = '5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4))'
-    result, _ = _evaluateExpression(_tokenizeExpression(test))
+    result, _ = _evaluateExpression(_tokenizeExpression(test), False)
     assert 12240 == result
 
     test = '((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2'
-    result, _ = _evaluateExpression(_tokenizeExpression(test))
+    result, _ = _evaluateExpression(_tokenizeExpression(test), False)
     assert 13632 == result
 
 
@@ -65,27 +64,27 @@ def test_resolvePuzzle01Using():
 
 def test__evaluateExpressionReversePrecedence():
     test = '1 + 2 * 3 + 4 * 5 + 6'
-    result, _ = _evaluateExpressionReversePrecedence(_tokenizeExpression(test))
+    result, _ = _evaluateExpression(_tokenizeExpression(test))
     assert 231 == result
 
     test = '2 * 3 + (4 * 5)'
-    result, _ = _evaluateExpressionReversePrecedence(_tokenizeExpression(test))
+    result, _ = _evaluateExpression(_tokenizeExpression(test))
     assert 46 == result
 
     test = '1 + (2 * 3) + (4 * (5 + 6))'
-    result, _ = _evaluateExpressionReversePrecedence(_tokenizeExpression(test))
+    result, _ = _evaluateExpression(_tokenizeExpression(test))
     assert 51 == result
 
     test = '5 + (8 * 3 + 9 + 3 * 4 * 3)'
-    result, _ = _evaluateExpressionReversePrecedence(_tokenizeExpression(test))
+    result, _ = _evaluateExpression(_tokenizeExpression(test))
     assert 1445 == result
 
     test = '5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4))'
-    result, _ = _evaluateExpressionReversePrecedence(_tokenizeExpression(test))
+    result, _ = _evaluateExpression(_tokenizeExpression(test))
     assert 669060 == result
 
     test = '((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2'
-    result, _ = _evaluateExpressionReversePrecedence(_tokenizeExpression(test))
+    result, _ = _evaluateExpression(_tokenizeExpression(test))
     assert 23340 == result
 
 
@@ -97,4 +96,7 @@ def test_resolvePuzzle02Using():
 
 def test_main():
     assert main(TEST_DAY_18_EVALEXP_FILE_NAME) == (26386, 693942)
+
+
+test__evaluateExpression()
 
