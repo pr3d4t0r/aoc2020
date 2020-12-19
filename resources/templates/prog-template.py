@@ -8,7 +8,10 @@
 #        API ref: https://more-itertools.readthedocs.io/en/latest/index.html
 
 
+from util import RECORD_SEPARATOR
+from util import loadExerciseDataAsTextRecordsFrom
 from util import loadExerciseDataFrom
+from util import loadRawExerciseTextFrom
 from util import mainStart
 
 
@@ -17,18 +20,26 @@ from util import mainStart
 
 # *** functions ***
 
-def resolvePuzzle01Using(data, tokens):
-    # TODO: remove this before pull request
-    # ---- cut here ----
+def resolvePuzzle01Using(data, tokens, rawText, textRecords):
+    # ---- proces data, tokens ---
     for seq, item in enumerate(data):
         print('%04d | %s' % (seq, item))
     print()
-    # ---- cut here ----
+    # ---- proces data, tokens ---
+
+    # ---- process rawText ---
+    for line in rawText.split('\n'):
+        pass
+    # ---- process rawText ---
+
+    # ---- process textRecords ---
+    for seq, record in enumerate(textRecords):
+        print('record %02d = %s' % (seq, record))
 
     return -1
 
 
-def resolvePuzzle02Using(data, tokens):
+def resolvePuzzle02Using(data, tokens, rawText, textRecords):
     return -1
 
 
@@ -37,18 +48,16 @@ def main(fileName:str = None):
     fileName = mainStart(fileName, %d%)
 
     data, tokens = loadExerciseDataFrom(fileName)
+    rawText = loadRawExerciseTextFrom(fileName)
+    textRecords = loadExerciseDataAsTextRecordsFrom(fileName)
 
     # ------------------------------------------
     # Answer 1
     # ------------------------------------------
-    answer1 = resolvePuzzle01Using(data, tokens)
-    print('answer 1: %d' % answer1)
+    answer1 = resolvePuzzle01Using(data, tokens, rawText, textRecords)
+    answer2 = resolvePuzzle02Using(data, tokens, rawText, textRecords)
 
-    # ------------------------------------------
-    # Answer 2
-    # ------------------------------------------
-    answer2 = resolvePuzzle02Using(data, tokens)
-    print('answer 2: %d' % answer2)
+    print('answer 1: %d, answer 2: %d' % (answer1, answer2))
 
     return answer1, answer2
 

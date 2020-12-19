@@ -14,16 +14,13 @@ OPERATIONS = {
 }
 
 
-
 # *** functions ***
 
 def _tokenizeExpression(expr):
     return expr.replace('(', '( ').replace(')', ' )').split()
 
 
-def _evaluateExpression(terms):
-    # https://en.wikipedia.org/wiki/Shunting-yard_algorithm
-
+def _evaluateExpression(terms, precedenceFlag = True):
     opStack = list()
     outputQueue = list()
 
@@ -33,9 +30,15 @@ def _evaluateExpression(terms):
         if term.isnumeric():
             outputQueue.append(int(term))
         elif term in OPERATIONS:
-            outputQueue.append(term)
+            if precedenceFlag:
+                while opStack and opStack[-1] > term:
+                    outputQueue.append(opStack.pop())
+                opStack.append(term)
+            else:
+                # Use the opStack?
+                outputQueue.append(term)
         elif term == '(':
-            v, r = _evaluateExpression(terms[ptr+1:])
+            v, r = _evaluateExpression(terms[ptr+1:], precedenceFlag)
             outputQueue.append(v)
             ptr += r
         elif term == ')':
@@ -43,78 +46,26 @@ def _evaluateExpression(terms):
             break
 
         ptr += 1
-            
-    while outputQueue:
-        # Linear is faster since the output queue is also linear.
-        t = outputQueue.pop(0)
-        if isinstance(t, int):
-            result = t
-        elif t == '+':
-            result += outputQueue.pop(0)
-        elif t == '*':
-            result *= outputQueue.pop(0)
+
+    while(opStack): outputQueue.append(opStack.pop())
+
+    if precedenceFlag:
+        for term in outputQueue:
+            opStack.append(OPERATIONS[term](opStack.pop(), opStack.pop()) if term in OPERATIONS else term)
+
+        result = opStack.pop()
+    else:
+        while outputQueue:
+            t = outputQueue.pop(0)
+            result = t if isinstance(t, int) else OPERATIONS[t](result, outputQueue.pop(0))
 
     return result, ptr
 
 
-
-def _evaluateExpressionReversePrecedence(terms):
-    """
-       In this exercise, + has greater precedence than *.  That's why the
-       expressions look weird.
-    """
-    opStack = list()
-    outputQueue = list()
-
-    ptr = 0
-    while ptr < len(terms):
-        term = terms[ptr]
-        if term.isnumeric():
-            outputQueue.append(int(term))
-        elif term in OPERATIONS:
-            while opStack and opStack[-1] > term:
-                outputQueue.append(opStack.pop())
-            opStack.append(term)
-        elif term == '(':
-            v, r = _evaluateExpressionReversePrecedence(terms[ptr+1:])
-            outputQueue.append(v)
-            ptr += r  # Use the opStack instead of the counter.
-        elif term == ')':
-            ptr += 1
-            break
-
-        ptr += 1
-
-    while(opStack):
-        outputQueue.append(opStack.pop())
-            
-    for term in outputQueue:
-        if term in OPERATIONS:
-            operand1 = opStack.pop()
-            operand0 = opStack.pop()
-            result = OPERATIONS[term](operand0, operand1)
-            opStack.append(result)
-        else:
-            opStack.append(term)
-
-    result = opStack.pop()
-
-    return result, ptr
-
-
-def resolvePuzzle01Using(data, tokens):
+def resolvePuzzleUsing(data, tokens, precedenceFlag):
     total = 0
     for seq, item in enumerate(data):
-        result, _ = _evaluateExpression(_tokenizeExpression(item))
-        total += result
-
-    return total
-
-
-def resolvePuzzle02Using(data, tokens):
-    total = 0
-    for seq, item in enumerate(data):
-        result, _ = _evaluateExpressionReversePrecedence(_tokenizeExpression(item))
+        result, _ = _evaluateExpression(_tokenizeExpression(item), precedenceFlag)
         total += result
 
     return total
@@ -125,10 +76,10 @@ def main(fileName:str = None):
 
     data, tokens = loadExerciseDataFrom(fileName)
 
-    answer1 = resolvePuzzle01Using(data, tokens)
+    answer1 = resolvePuzzleUsing(data, tokens, False)
     print('answer 1: %d' % answer1)
 
-    answer2 = resolvePuzzle02Using(data, tokens)
+    answer2 = resolvePuzzleUsing(data, tokens, True)
     print('answer 2: %d' % answer2)
 
     return answer1, answer2

@@ -6,6 +6,11 @@ import fileinput
 import sys
 
 
+# +++ constants +++
+
+RECORD_SEPARATOR = '\n\n'
+
+
 # *** functions ***
 
 def die(message:str, exitCode:int, unitTest:bool = False):
@@ -39,4 +44,13 @@ def loadExerciseDataFrom(fileName: str, allowEmptyLines = False) -> list:
 
     return data, tokens
 
+
+def loadRawExerciseTextFrom(fileName: str) -> str:
+    return open(fileName, 'r').read()
+
+
+def loadExerciseDataAsTextRecordsFrom(fileName: str, recordSeparator = RECORD_SEPARATOR):
+    rawData = loadRawExerciseTextFrom(fileName)
+
+    return rawData.strip().split(RECORD_SEPARATOR)
 

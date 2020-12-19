@@ -3,13 +3,16 @@
 
 
 from util import die
+from util import loadExerciseDataAsTextRecordsFrom
 from util import loadExerciseDataFrom
+from util import loadRawExerciseTextFrom
 from util import mainStart
 
 
 # --- constants ---
 
 TEST_EXERCISE_DATA_LOAD_FILE_NAME = './resources/test/gamecomp-test-data.txt'
+TEST_RAW_TEXT_FILE_NAME = 'resources/test/day_19_validmsgs-test-data.txt'
 
 
 # +++ tests +++
@@ -32,5 +35,19 @@ def test_loadExerciseDataFrom():
     assert isinstance(_tokens, list)
 
 
-test_loadExerciseDataFrom()
+def test_loadRawExerciseTextFrom():
+    rawText = loadRawExerciseTextFrom(TEST_RAW_TEXT_FILE_NAME)
+
+    assert type(rawText) == str
+
+
+def test_loadExerciseDataAsTextRecordsFrom():
+    records = loadExerciseDataAsTextRecordsFrom(TEST_RAW_TEXT_FILE_NAME)
+
+    assert 2 == len(records)
+
+    assert '0:' in records[0]
+    assert 'bbb\n' in records[1]
+    assert '0:' not in records[1]
+    assert 'bbb\n' not in records[0]
 
