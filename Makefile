@@ -89,6 +89,7 @@ test: ALWAYS
 	pytest -v ./test/test_day_17_conwaycubes.py
 	pytest -v ./test/test_day_18_evalexp.py
 	pytest -v ./test/test_day_19_validmsgs.py
+	pytest -v ./test/test_day_20_imgtiles.py
 	pip uninstall -y $(MODULE)==$(VERSION) || true
 	rm -Rfv $$(find $(MODULE) | awk '/__pycache__$$/')
 	rm -Rfv $$(find ./aoc | awk '/__pycache__$$/')
