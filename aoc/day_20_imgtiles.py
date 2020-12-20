@@ -54,7 +54,6 @@ def resolvePuzzle01Using(data, tokens, rawText, textRecords):
 
     e = tiles[2311]['edges']
 
-
     return -1
 
 
