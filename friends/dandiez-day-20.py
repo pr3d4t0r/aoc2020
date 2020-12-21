@@ -176,8 +176,8 @@ def main(input_file):
     print(side_length)
     tiles_dict = {t.num: t for t in tiles}
     grid = {(r, c): None for r in range(side_length) for c in range(side_length)}
-#     tiles_left = [t.num for t in tiles]
-#     solution = solve(grid, tiles_left, side_length, tiles_dict)
+    tiles_left = [t.num for t in tiles]
+    solve(grid, tiles_left, side_length, tiles_dict)
     print(grid)
     p1 = (
             int(grid[0, 0][0])
